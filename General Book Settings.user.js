@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name         General Book Settings
 // @namespace    localhost
-// @version      1.3// @description  General Book Settings
+// @version      1.3
+// @description  General Book Settings
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Schedule/Settings/Default.aspx
 // @grant        none
