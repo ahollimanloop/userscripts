@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Make Override Import/Export
 // @namespace    localhost
-// @version      1.2
+// @version      1.3
 // @description  Exports the Make Override template so you can import it to another page.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/Notifications/AppointmentConfirmation/MakeSettings.aspx*
@@ -79,6 +79,17 @@ function Export() {
                 trigger_settings[selector] = $(this).val();
             }
         }
+        else {
+            var value = $(this).val();
+            var text = '';
+            $(this).children().each(function() {
+                if ($(this).val() == value) {
+                    text = $(this).text();
+                };
+            });
+            trigger_settings[selector] = text;
+            console.log("coupon selector: ", selector, text);
+        };
     });
 
     $('#exportBox').val(JSON.stringify(trigger_settings));
@@ -93,15 +104,33 @@ function Import() {
 	trigger_keys = Object.keys(trigger_settings);
 
 	for (i=0; i<trigger_keys.length; i++) {
-        if (trigger_settings[trigger_keys[i]] == 'checked') {
-            $("#" + trigger_keys[i]).prop('checked', true);
-        }
-        else if (trigger_settings[trigger_keys[i]] == 'unchecked') {
-            $("#" + trigger_keys[i]).prop('checked', false);
+        if (trigger_keys[i].indexOf('coupon') < 0 && trigger_keys[i].indexOf('Coupon') < 0) {
+            if (trigger_settings[trigger_keys[i]] == 'checked') {
+                $("#" + trigger_keys[i]).prop('checked', true);
+            }
+            else if (trigger_settings[trigger_keys[i]] == 'unchecked') {
+                $("#" + trigger_keys[i]).prop('checked', false);
+            }
+            else {
+                $("#" + trigger_keys[i]).val(trigger_settings[trigger_keys[i]]);
+            }
         }
         else {
-            $("#" + trigger_keys[i]).val(trigger_settings[trigger_keys[i]]);
-        }
+            console.log("coupon found");
+            var selector = "#" + trigger_keys[i];
+            var text = trigger_settings[trigger_keys[i]];
+            var value = '';
+            console.log(selector, text);
+            $(selector).children().each(function() {
+                console.log($(this).text(), text);
+                if ($(this).text() == text) {
+                    value = $(this).val();
+                    console.log(value);
+                };
+            });
+            $(selector).val(value);
+            console.log(selector, value);
+        };
     }
 }
 

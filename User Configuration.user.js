@@ -138,7 +138,7 @@ function SetPassword() {
     $("#ctl00_ctl00_Main_Main_tfNewPassword_textBox").val(password); //new password
     $("#ctl00_ctl00_Main_Main_tfConfirmPassword_textBox").val(password); //confirm password
     $("#ctl00_ctl00_Main_Main_tfNewPassword_label").append('<font color="red"> >[</font>').append(password).append('<font color="red">]< </font>');
-    console.log("pw:", password, " | ln:", lastName);
+    //console.log("pw:", password, " | ln:", lastName);
 
 }
 
@@ -168,20 +168,27 @@ if (sessionStorage.getItem("newUser") == 0) {
 
 function SetAssociation() {
     var counter = 0;
+
+    var firstName = $('#ctl00_ctl00_Main_Main_tfFirstName_textBox').val();
+    var upperFirst = firstName.toUpperCase();
+    var lowerFirst = firstName.toLowerCase();
+
     var lastName = $('#ctl00_ctl00_Main_Main_tfLastName_textBox').val();
-    var upperName = lastName.toUpperCase();
-    var lowerName = lastName.toLowerCase();
+    var upperLast = lastName.toUpperCase();
+    var lowerLast = lastName.toLowerCase();
+
     $('#ctl00_ctl00_Main_Main_ddlEmployee').children().each(function() {
-        var name = $(this).text();
-        var key = $(this).val();
-        if (name.includes(lastName) || name.includes(upperName) || name.includes(lowerName)) {
-            $('#ctl00_ctl00_Main_Main_ddlEmployee').val(key);
-            console.log(name + ", " + key,  ", SET");
-            counter++;
-            $('#ctl00_ctl00_Main_Main_ddlEmployee_chzn > a > span').text(name);
+        if ($('#ctl00_ctl00_Main_Main_ddlEmployee').val() == "") {
+            var name = $(this).text();
+            var key = $(this).val();
+            if ((name.includes(lastName) || name.includes(upperLast) || name.includes(lowerLast)) && (name.includes(firstName) || name.includes(upperFirst) || name.includes(lowerFirst))) {
+                $('#ctl00_ctl00_Main_Main_ddlEmployee').val(key);
+                counter++;
+                $('#ctl00_ctl00_Main_Main_ddlEmployee_chzn > a > span').text(name);
+            };
         };
     });
-    if (counter == 0) {
+    if (counter == 0 && $('#ctl00_ctl00_Main_Main_ddlEmployee').val() == "") {
         $("#MainContent > div.container_24.clearfix > h1").append("<div style='text-align: center'><br><br>No Association Found!</div>");
     };
 };
