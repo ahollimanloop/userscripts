@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unbatcher Bot
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Unbatches triggers. Use with caution.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/Notifications/*/Settings.aspx*

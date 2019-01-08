@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Third Party IDs
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Third Party IDs
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/ThirdPartyIDs.aspx

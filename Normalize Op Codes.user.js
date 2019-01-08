@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Normalize Op Codes
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Automate op code normalization and adds IFM codes.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/OpCodesNormalize.aspx

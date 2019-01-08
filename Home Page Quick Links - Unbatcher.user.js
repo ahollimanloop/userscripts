@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Home Page Quick Links / Unbatcher
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Adds links to the default page to quickly get to settings
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Default.aspx

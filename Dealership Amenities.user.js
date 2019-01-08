@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Dealership Amenities
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Adds a link button to master amenities
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/DealershipAmenities.aspx

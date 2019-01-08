@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OCAS Settings
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  OCAS Settings
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Schedule/Settings/OCAS.aspx

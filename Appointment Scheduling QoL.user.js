@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Appointment Scheduling QoL
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Selects all highlighted opcodes when verifying appointment writes
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/Schedule/Details.aspx?*
