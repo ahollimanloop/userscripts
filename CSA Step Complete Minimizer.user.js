@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CSA Step Complete Minimizer
 // @namespace    localhost
-// @version      1.2
+// @version      1.3
 // @description  Minimizes complete CSA steps.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://csa.autoloop.us/CustomerProduct/Edit/*
@@ -42,7 +42,7 @@ function MaximizeSteps() {
 
 // QA Recheck / Incomplete step checker
 
-$('#page_canvas > div.sub-nav.row-fluid').append('<fieldset id="recheckerbox" style="float: right; margin-right: 500px;text-align: center">')
+$('#page_canvas > div.sub-nav.row-fluid').append('<div id="recheckerbox" style="float: right;text-align: center; width: 100%">')
 
 var incompleteSteps = false;
 
@@ -86,9 +86,9 @@ if (GetProdStatus() == "Go-Live Ready") {
                 var url = window.location.href;
                 var subject = 'Autoloop - ' + companyName + ' - ' + product + ' QA Recheck';
                 var body = 'Hello Sarah,%0D%0A%0D%0APlease recheck ' + product + ' for ' + companyName + '.  It has been over 2 weeks since last QA.%0D%0ALink: ' + url + '%0D%0A%0D%0AThank you,';
-                var html = '<h2>';
+                var html = '<fieldset style="padding-top: 30px; width: 30%; margin: auto"><h2>';
                 html += '<a href="mailto:installationsQA@autoloop.com?cc=Installs@autoloop.com&subject='+subject+'&body='+body+'">';
-                html += 'This product requires a QA recheck!</a></h2>';
+                html += 'This product requires a QA recheck!</a></h2></fieldset>';
 				$('#recheckerbox').append(html);
 			};
 		};
@@ -100,5 +100,5 @@ if (GetProdStatus() == "Go-Live Ready") {
 };
 
 if (incompleteSteps == true) {
-    $('#recheckerbox').append('<h2>Incomplete Steps!</h2>');
+    $('#recheckerbox').append('<fieldset style="padding-top: 30px; width: 30%; margin: auto"><h2>Incomplete Steps!</h2></fieldset>');
 };
