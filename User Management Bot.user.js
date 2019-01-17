@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         User Management Bot
 // @namespace    localhost
-// @version      1.4
+// @version      1.5
 // @description  Automate user management.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/UserManagement.aspx
@@ -216,7 +216,7 @@ function EnterUser() {
     };
 
     // Save non-existing employee Associations (for applicable roles)
-    if (user_data['role'] == "Service Manager" || user_data['role'] == "Service Advisor" || user_data['role'] == "Technician" || user_data['role'] == "Parts User") {
+    if (user_data['role'] == "Service Manager" || user_data['role'] == "Service Advisor" || user_data['role'] == "Technician") {
         if ($('#ctl00_ctl00_Main_Main_ddlEmployee_chzn > a > span').text() == "(None)") {
             var no_association = [];
             if (sessionStorage.getItem('no_ass') == null) {

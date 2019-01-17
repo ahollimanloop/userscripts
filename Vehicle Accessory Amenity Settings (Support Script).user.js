@@ -14,13 +14,13 @@
 // @grant        none
 // ==/UserScript==
 
-
 window.onload = CheckState();
 
 $('#lbtnCancel').click(function() {
-	Revisit($('#DealershipDisplay > span').text());
+    var stores = GetStoreData();
+    storeName = stores['name'];
+    Revisit(storeName);
 });
-
 $('#MainContent > div.container_24.clearfix').append("<button id='VehAccScriptBtn' type='button'>Execute Script</button>");
 $('#VehAccScriptBtn').click(function() {
     ImportData();
@@ -47,21 +47,32 @@ function ImportData() {
 
 function CheckState() {
     console.log('checking');
-    window.onbeforeunload=null;
     var state = sessionStorage.getItem("state");
 
     // check if done
     if (sessionStorage.stores == "[]") {
-        alert("Done");
-        alert(JSON.parse(sessionStorage.revisit));
+        var revisitlist = JSON.parse(sessionStorage.revisit);
+        var revisitpack = 'Stores: \n';
+        for (i=0;i<revisitlist.length;i++) {
+            revisitpack += revisitlist[i] + '\n';
+        };
+        console.log("Done\n\n" + revisitpack);
+        alert('done');
         sessionStorage.stores == 'done';
         sessionStorage.state = "done";
         return;
     };
 
     if (state == "saved") {
-        window.location.href = "https://autoloop.us/dms/app/companyselector.aspx";
-        sessionStorage.state = "ready";
+        StepForward();
+        if (window.location.href == "https://autoloop.us/dms/app/companyselector.aspx") {
+            sessionStorage.state = "ready";
+            MoveToNext();
+        }
+        else {
+            window.location.href = "https://autoloop.us/dms/app/companyselector.aspx";
+            sessionStorage.state = "ready";
+        };
     };
     if (state == "ready") {
         MoveToNext();
@@ -76,7 +87,6 @@ function CheckState() {
         }, 4000);
     };
     if (state == "next") {
-        StepForward();
         sessionStorage.setItem('state', "saved");
     };
 };
@@ -114,30 +124,33 @@ function GoToAppointment() {
 
 function RunScript() {
     console.log('running');
-    // goto services tab
-    $('#servicesDetailsTabLi > a').click();
+    stores = GetStoreData();
+    storeName = stores['name'];
+    setTimeout(function() {
+        if ($('#AppointmentAvailabilityGridContainer > div:nth-child(1)').prop('class') != 'ng-hide' || $('#AppointmentAvailabilityGridContainer > div:nth-child(2)').prop('class') != 'ng-hide' || $('#AppointmentAvailabilityGridContainer > div:nth-child(3)').prop('class') != 'ng-hide' || $('#AppointmentAvailabilityGridContainer > div:nth-child(4)').prop('class') != 'ng-hide') {
+            if ($('#tbAppointmentTime').val() != "") {
+                $('#servicesDetailsTabLi > a').click();
+            }
+            else {
+                console.log('adding to revisit: no apt time');
+                Revisit(storeName);
+                sessionStorage.setItem('state', "saved");
+                window.location.href = "https://autoloop.us/dms/app/companyselector.aspx";
+            };
+        }
+        else {
+            $('#servicesDetailsTabLi > a').click();
+        };
+    }, 3000);
 };
 
 function SelectOpcode() {
     console.log('selecting opcode');
-    setTimeout(function() {
-        console.log('timeout, cancelling');
-        var realConfirm = window.confirm;
-        window.confirm = function() {
-            window.confirm = realConfirm;
-            return true;
-        };
-        var realPrompt = window.prompt;
-        window.prompt = function() {
-            window.prompt = realPrompt;
-            return true;
-        };
-        $('#lbtnCancel').click();
-    }, 30000);
     var store = GetStoreData();
     var opcodelist = store['opcode'];
     var storeName = store['name'];
     var unableToFind = true;
+
     // look for opcode in list of normalized
     opcodelist = opcodelist.split(' ');
     var opcodelen = opcodelist.length;
@@ -145,6 +158,7 @@ function SelectOpcode() {
     $('.opcode_column.valign_top :input').each(function() {
         services.push($(this).val());
 	});
+    var foundopcodes = 0;
     for (i=0;i<opcodelen;i++) {
         var importedOpcode = opcodelist[i];
         $('#ddlVehicleServices').children().each(function() {
@@ -163,47 +177,46 @@ function SelectOpcode() {
                 else {
                     unableToFind = false;
                     console.log('opcode exists');
+                    foundopcodes++;
                 };
             };
         });
     };
 
+    if (foundopcodes == opcodelen) {
+        console.log('all opcodes already added');
+        sessionStorage.setItem('state', "saved");
+        window.location.href = "https://autoloop.us/dms/app/companyselector.aspx";
+    };
     // make sure opcode was found
     if (unableToFind == true) {
+        console.log('unable to find 1 or more opcode');
         Revisit(storeName);
 
         sessionStorage.setItem('state', "next");
-
-        var realConfirm = window.confirm;
-        window.confirm = function() {
-            window.confirm = realConfirm;
-            return true;
-        };
-        $('#lbtnCancel').click();
     }
     $('#appointmentDetailsTabLi > a').click();
     setTimeout(function() {
         // uncheck confirmation and save and close
-        $('#chkCustomerEmail').prop('checked', false);
-        if ($('#tbAppointmentTime').val() == "" || $('#AppointmentAvailabilityGridContainer > div:nth-child(4)').text().includes('Date Already Passed')) {
-            console.log('adding to revisit: no apt time');
-            Revisit(storeName);
-
-            var realConfirm = window.confirm;
-            window.confirm = function() {
-                window.confirm = realConfirm;
-                return true;
+        if ($('#AppointmentAvailabilityGridContainer > div:nth-child(1)').prop('class') != 'ng-hide' || $('#AppointmentAvailabilityGridContainer > div:nth-child(2)').prop('class') != 'ng-hide' || $('#AppointmentAvailabilityGridContainer > div:nth-child(3)').prop('class') != 'ng-hide' || $('#AppointmentAvailabilityGridContainer > div:nth-child(4)').prop('class') != 'ng-hide') {
+            if ($('#tbAppointmentTime').val() != "") {
+                $('#chkCustomerEmail').prop('checked', false);
+                $('#lbtnSaveClose').click();
+            }
+            else {
+                console.log('adding to revisit: no apt time');
+                Revisit(storeName);
+                sessionStorage.setItem('state', "saved");
+                window.location.href = "https://autoloop.us/dms/app/companyselector.aspx";
             };
-            console.log('clicking cancel');
-            $('#lbtnCancel').click();
         }
         else {
+            $('#chkCustomerEmail').prop('checked', false);
             $('#lbtnSaveClose').click();
         };
     }, 5000);
 
     sessionStorage.setItem('state', "saved");
-    StepForward();
 };
 
 // utility functions
@@ -211,9 +224,6 @@ function SelectOpcode() {
 function Revisit(store) {
     console.log('adding ' + store + ' to revisit queue');
     var revisitlist = JSON.parse(sessionStorage.getItem("revisit"));
-    if (revisitlist.includes(store)) {
-        return;
-    }
     revisitlist.push(store);
     sessionStorage.setItem('revisit', JSON.stringify(revisitlist));
 };
