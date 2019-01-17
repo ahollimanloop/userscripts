@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Normalize Op Codes (Support)
 // @namespace    localhost
-// @version      1.0
+// @version      1.1
 // @description  Automate op code normalization..
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://*/DMS/App/DealershipSettings/OpCodesNormalize.aspx
