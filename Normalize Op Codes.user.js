@@ -9,6 +9,7 @@
 // @grant        none
 // ==/UserScript==
 
+// dynamic button, will be red is script is considered active
 
 if (sessionStorage.getItem("state") != undefined) {
     $('#ctl00_ctl00_Main_Main_siteMapPageTitle').append("<button id='importButton' type='button' class='float_right'><font style='color: red'>Import OpCodes</font></button>");
@@ -23,6 +24,7 @@ else {
     });
 };
 
+// IFM buttons
 
 if (sessionStorage.getItem("ifmon") != undefined) {
     $('#ctl00_ctl00_Main_Main_siteMapPageTitle').append("<button id='ifmButton' type='button' class='float_right'><font style='color: red'>Import IFM Codes</font></button>");
@@ -37,35 +39,24 @@ else {
     });
 };
 
-
-/*
-$('#ctl00_ctl00_Main_Main_siteMapPageTitle').append("<button id='clearButton' type='button'>Clear State</button><hr>");
-    $("#clearButton").click(function(){
-        sessionStorage.clear("state");
-    });
-*/
-
-// when window loads, check state -- this is the trigger
+// when window loads, check state
 
 window.onload(CheckState());
-
-
 
 // Functions
 
 function CheckState() {
-    if (sessionStorage.getItem("ifmon")) { IFMCheckState(); return; };
     var state = sessionStorage.getItem("state");
-    $('#State').val(state);
-
+    console.log('current state: ' + state);
     if (state == "created") {
         EnterCodes();
     }
 
     if (state == "saved") {
         if (sessionStorage.getItem("data") == "[]") {
-            alert("Done")
-            sessionStorage.clear("state");
+            alert("Done.")
+            sessionStorage.clear();
+            location.reload();
         }
         else {
             CreateCodes();
@@ -75,7 +66,7 @@ function CheckState() {
 
 
 function ImportCodes() {
-    var data = prompt('Paste Data from Excel Sheet (Column "O")');
+    var data = prompt('Paste Data from Excel Sheet (Column "Q")');
     data = data.split('{{DELIM}}');
     data.pop();
 
@@ -88,27 +79,34 @@ function ImportCodes() {
     var overwrite = prompt('Overwrite existing opcodes with new info? (Only "YES" will overwrite)')
     if (overwrite == 'YES') {
         sessionStorage.setItem("overwrite", "yes");
+        console.log('overwrite enabled')
     }
     CreateCodes(); //force first state change
 }
 
 
 function CreateCodes() {
-    $('#ctl00_ctl00_Main_Main_CreateOpCodeButton').click();
     sessionStorage.setItem("state", "created");
+    console.log('Creating opcode...');
+    $('#ctl00_ctl00_Main_Main_CreateOpCodeButton').click();
 }
 
 function EnterCodes() {
-
     var opcode = GetOpCode();
     var overwrite = sessionStorage.getItem("overwrite");
     if (overwrite != "yes") {
         while (opCodeExistCheck(opcode.opCode) == true){
-            console.log("Op code exists, stepping forward");
+            console.log("Opcode " + opcode.opCode + " exists, stepping forward");
             StepForward();
             opcode = GetOpCode();
         }
     }
+    if (sessionStorage.getItem("data") == "[]") {
+        console.log('ran out of data during opCodeExistCheck, cancelling creation')
+        sessionStorage.setItem('state', 'saved');
+        $('#ctl00_ctl00_Main_Main_fvNormalizedOpCode_CancelChangesButton').click();
+        return;
+    };
     // fill out boxes
     $('#ctl00_ctl00_Main_Main_fvNormalizedOpCode_OpCodeTextBox').val(opcode['opCode']);
     $('#ctl00_ctl00_Main_Main_fvNormalizedOpCode_OpCodeDescTextBox').val(opcode['name']);
@@ -154,6 +152,7 @@ function GetOpCode() {
 
 function StepForward() {
     // move to next op code and save back to session
+    console.log('stepping forward');
     var data = sessionStorage.getItem("data");
     data = JSON.parse(data);
     for (i=0;i<7;i++) {
@@ -162,7 +161,7 @@ function StepForward() {
     sessionStorage.setItem("data", JSON.stringify(data));
 }
 
-// from Ned's old macro, not using jQuery calls
+// from Ned's old macro, not using jQuery (shouldn't matter)
 function opCodeExistCheck(opCode){
 	var found = false;
 	var rowCount = window.document.getElementById("ctl00_ctl00_Main_Main_gvNormalizedOpCodes").rows.length;
@@ -174,7 +173,6 @@ function opCodeExistCheck(opCode){
     }
 	return found;
 }
-
 
 // IFM Functions
 

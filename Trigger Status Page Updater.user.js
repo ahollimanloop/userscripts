@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Trigger Status Page Updater
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Checks all the boxes!
 // @author       You
 // @include      https://csa.autoloop.us/CustomerTrigger/Customer/*
@@ -16,6 +16,11 @@ $('#setSalesTriggers').click(function() {
 $('#page_canvas > form > div.key.section').append("<button type=button id='setServiceTriggers'>Update Service</button>");
 $('#setServiceTriggers').click(function() {
     UpdateService();
+});
+
+$('#page_canvas > form > div.key.section').append("<span style='float: right'><button type='button' style='margin-bottom: 10px' id='updateAllBtn'>Update All Notes: </button><input type='text' id='updateAllBox'></span>");
+$('#updateAllBtn').click(function() {
+    UpdateAllNotes();
 });
 
 function UpdateSales() {
@@ -75,3 +80,8 @@ function UpdateService() {
         }
     });
 }
+
+function UpdateAllNotes() {
+    $('#page_canvas > form > div:nth-child(4) > div > table :input.input-medium').val($('#updateAllBox').val());
+    $('#page_canvas > form > div:nth-child(5) > div > table :input.input-medium').val($('#updateAllBox').val());
+};
