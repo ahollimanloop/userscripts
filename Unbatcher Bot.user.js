@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Unbatcher Bot
 // @namespace    localhost
-// @version      1.2
+// @version      1.4
 // @description  Unbatches triggers. Use with caution.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/Notifications/*/Settings.aspx*
@@ -10,10 +10,12 @@
 // @grant        none
 // ==/UserScript==
 
-window.onload = CheckState();
+//window.onload = CheckState();
+window.addEventListener('load', CheckState());
 
 function CheckState() {
-    var state = sessionStorage.state;
+    var state = sessionStorage.ub_state;
+    console.log('Unbatcher Bot: current state: ' + state);
     if (state == undefined) {
         return;
     };
@@ -23,7 +25,7 @@ function CheckState() {
     if (state == 'queued') {
         queue.shift();
         sessionStorage.queue = JSON.stringify(queue);
-        sessionStorage.state = 'batch';
+        sessionStorage.ub_state = 'batch';
         if (url == undefined) {
             window.location.href = 'https://autoloop.us/DMS/App/Default.aspx';
             sessionStorage.clear();
@@ -35,7 +37,7 @@ function CheckState() {
     if (state == 'queued2') {
         queue.shift();
         sessionStorage.queue = JSON.stringify(queue);
-        sessionStorage.state = 'edit';
+        sessionStorage.ub_state = 'edit';
         if (url == undefined) {
             window.location.href = 'https://autoloop.us/DMS/App/Default.aspx';
             sessionStorage.clear();
@@ -45,11 +47,11 @@ function CheckState() {
         window.location.href = url;
     };
     if (state == 'batch') {
-        sessionStorage.state = 'queued2';
+        sessionStorage.ub_state = 'queued2';
         DeleteBatches();
     };
     if (state == 'edit') {
-        sessionStorage.state = 'queued';
+        sessionStorage.ub_state = 'queued';
         DisableQueues();
     };
 };

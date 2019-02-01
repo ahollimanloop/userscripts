@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        User Configuration
 // @namespace    localhost
-// @version      1.2
+// @version      1.3
 // @description  Adds new users, sets up permissions.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/DealershipSettings/EditUser.aspx?UserName=*
@@ -260,6 +260,7 @@ function TechSettings() {
     $("#ctl00_ctl00_Main_Main_cblRoles_10").prop("checked", true); //employee
     $("#ctl00_ctl00_Main_Main_cblRoles_23").prop("checked", true); //technician
     $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
+    $('#ctl00_ctl00_Main_Main_cblRoles_0').prop("checked", true); // Agent
     //$('#ctl00_ctl00_Main_Main_cblRoles_48').prop("checked", true); // mpi technician
     SetAssociation();
 }
@@ -268,7 +269,7 @@ function PartsSettings() {
     $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(3); //login landing page set to scheduling
     $("#ctl00_ctl00_Main_Main_cblRoles_10").prop("checked", true); //employee
     //$('#ctl00_ctl00_Main_Main_cblRoles_49').prop("checked", true); // mpi parts user
-    SetAssociation();
+    $('#ctl00_ctl00_Main_Main_cblRoles_0').prop("checked", true); // Agent
 }
 
 

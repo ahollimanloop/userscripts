@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         User Management Bot
 // @namespace    localhost
-// @version      1.5
+// @version      1.7
 // @description  Automate user management.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/UserManagement.aspx
@@ -17,19 +17,20 @@
 // when window loads, check state -- this is the trigger
 
 var timeOut = 1000;
-window.onload = CheckState();
+//window.onload = CheckState();
+window.addEventListener('load', CheckState());
 
 // Buttons
 
 if (window.location.href == 'https://autoloop.us/DMS/App/DealershipSettings/UserManagement.aspx' || window.location.href == 'https://autoloop.us/DMS/App/DealershipSettings/UserManagement.aspx#!') {
     $('#MainContent > div.container_24.clearfix > h1').append("<button id='importButton' type='button' class='float_right'>Import Users</button>");
-    var data = $("#importButton").click(function(){
+    $("#importButton").click(function(){
         ImportUsers();
     });
 
-    if (sessionStorage.getItem("state")) {
+    if (sessionStorage.getItem("um_state")) {
         $('#MainContent > div.container_24.clearfix > h1').append("<button id='clearButton' type='button' class='float_right'>Clear Users</button>");
-        var data = $("#clearButton").click(function(){
+        $("#clearButton").click(function(){
             ClearUsers();
         });
     };
@@ -43,15 +44,14 @@ function ClearUsers() {
 }
 
 function CheckState() {
-    // console logging
-    //console.log(sessionStorage.getItem("state"));
-    //console.log(sessionStorage.getItem("users"));
+    console.log(sessionStorage.getItem("users"));
 
-    var state = sessionStorage.getItem("state");
+    var state = sessionStorage.getItem("um_state");
+    console.log('User Management Bot: current state: ' + state);
 
     if (state == "created") {
         $("#ctl00_ctl00_Main_Main_cbAllowUserPassword").click(); //user chooses password click
-        sessionStorage.setItem("state", "ready");
+        sessionStorage.setItem("um_state", "ready");
     }
     if (state == "ready") {
         setTimeout(function() {
@@ -61,11 +61,11 @@ function CheckState() {
 
     if (state == "existing") {
         $('#ctl00_ctl00_Main_Main_btnAdd').click();
-        sessionStorage.setItem("state", "existing_saved");
+        sessionStorage.setItem("um_state", "existing_saved");
     }
 
     if (state == "existing_saved") {
-        sessionStorage.setItem("state", "ready");
+        sessionStorage.setItem("um_state", "ready");
         var user_data = GetUserData();
         window.location.href = "https://autoloop.us/DMS/App/DealershipSettings/EditUser.aspx?UserName=" + user_data['email'];
         sessionStorage.setItem("pw_exists", "true");
@@ -76,7 +76,7 @@ function CheckState() {
             StepForward();
             if (sessionStorage.getItem("users") == "[]") {
                 alert("The following users were not found to have any associations:\n\n" + ReturnFailedAss())
-                sessionStorage.clear("state");
+                sessionStorage.clear("um_state");
             }
             else {
                 CreateUser();
@@ -117,7 +117,7 @@ function ImportUsers() {
 
 function CreateUser() {
     $('#ctl00_ctl00_Main_Main_btnAddNewUser').click();
-    sessionStorage.setItem("state", "created");
+    sessionStorage.setItem("um_state", "created");
 }
 
 
@@ -236,7 +236,7 @@ function EnterUser() {
 
     setTimeout(function() {
         // save state
-        sessionStorage.setItem("state", "saved");
+        sessionStorage.setItem("um_state", "saved");
         $('#ctl00_ctl00_Main_Main_btnSaveButton').click();
     }, timeOut);
 }
@@ -265,6 +265,6 @@ function StepForward() {
 
 function AddExisting() {
     var user_data = GetUserData();
-    sessionStorage.setItem("state", "existing");
+    sessionStorage.setItem("um_state", "existing");
     window.location.href = "https://autoloop.us/DMS/App/DealershipSettings/AddExistingUser.aspx?UserName=" + user_data['email'];
 };
