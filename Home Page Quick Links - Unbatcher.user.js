@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Home Page Quick Links / Unbatcher
 // @namespace    localhost
-// @version      1.2
+// @version      1.3
 // @description  Adds links to the default page to quickly get to settings
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Default.aspx
@@ -255,6 +255,6 @@ function Unbatch(cat) {
         unbatchQueue = GetSalesQueue();
     };
     sessionStorage.setItem('queue', JSON.stringify(unbatchQueue));
-    sessionStorage.setItem('state', 'queued');
+    sessionStorage.setItem('ub_state', 'queued');
     location.reload();
 };
