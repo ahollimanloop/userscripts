@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Capacity Import/Export
 // @namespace    localhost
-// @version      1.1
+// @version      1.2
 // @description  Copy capacity settings from one advisor and import to another
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Schedule/Settings/Capacities.aspx
@@ -11,14 +11,15 @@
 
 // set timeout for 2 seconds to give capacities time to load, then adds our buttons
 
-setTimeout(function() {
+$('#mapTitle').append("<button type='button' id='executeBtn' class='float_right'>Apply Script</button>");
+$('#executeBtn').click(function() {
     $('#RightContent > div > div').children().children().children().children().each(function() {
         $('td.name > a', this).click(function() {
             AddButtons();
         });
     });
-    $('#mapTitle').append("<small style='float: right; font-size:10px'>Script Ready</small>");
-}, 2000);
+    $('#mapTitle').append("<small style='float: right; font-size:10px'>Script Applied</small>");
+});
 
 
 function AddButtons() {
