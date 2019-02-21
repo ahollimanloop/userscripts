@@ -97,7 +97,7 @@ $("#BDCSettingsBtn").click(function() {
 // bdc admin button
 $("#salesContainer").append("<button id='BDCAdminBtn' type='button'>BDC Admin</button>");
 $("#BDCAdminBtn").click(function() {
-    BDCManager();
+    BDCAdmin();
 });
 
 // quote admin settings button
