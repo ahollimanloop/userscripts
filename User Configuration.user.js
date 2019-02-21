@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        User Configuration
 // @namespace    localhost
-// @version      1.3
+// @version      1.4
 // @description  Adds new users, sets up permissions.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/DealershipSettings/EditUser.aspx?UserName=*
@@ -230,6 +230,7 @@ function BDCSettings() {
     $("#ctl00_ctl00_Main_Main_cblRoles_11").prop("checked", true); //first appointment
     $("#ctl00_ctl00_Main_Main_cblRoles_20").prop("checked", true); //service coordinator
     $("#ctl00_ctl00_Main_Main_cblRoles_4").prop("checked", true); //BDC Rep
+    $("#ctl00_ctl00_Main_Main_cblRoles_31").prop("checked", true); // Multi Subdomain User
 }
 
 function BDCAdmin() {
@@ -239,6 +240,7 @@ function BDCAdmin() {
     $("#ctl00_ctl00_Main_Main_cblRoles_11").prop("checked", true); //first appointment
     $("#ctl00_ctl00_Main_Main_cblRoles_20").prop("checked", true); //service coordinator
     $("#ctl00_ctl00_Main_Main_cblRoles_3").prop("checked", true); // bdc admin
+    $("#ctl00_ctl00_Main_Main_cblRoles_31").prop("checked", true); // Multi Subdomain User
 }
 
 function AdminSettings() {
