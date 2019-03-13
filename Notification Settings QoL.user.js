@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Notification Settings QoL
 // @namespace    localhost
-// @version      1.3
+// @version      1.4
 // @description  Various QoL Addons for Trigger Notifications
 // @author       Austin Holliman (aholliman@autoloop.com
 // @include      https://autoloop.us/DMS/App/Notifications/*/Settings.aspx
@@ -17,9 +17,9 @@ $('#BatchSaveBtn').click(function () {
 
 // check amenities automatically
 if ($('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_cbShowAmenities').prop("checked") == false) {
-    $('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_cbShowAmenities').click();
-    var obj = $('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_cbShowAmenities').parent();
-    obj.append("<small>(Checked by Script! Save Page!!)</small>");
+    // $('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_cbShowAmenities').click();
+    // var obj = $('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_cbShowAmenities').parent();
+    // obj.append("<small>(Checked by Script! Save Page!!)</small>");
     var dep = $('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_ddlTriggerDepartment').val();
     if (dep == 0) {
         $('#ctl00_ctl00_Main_Main_loopServiceSettings_loopBaseTriggerSettings_ddlAmenityCategory').val(1);
