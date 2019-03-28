@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Product Activation Email Generator
 // @namespace    localhost
-// @version      1.2
+// @version      1.3
 // @description  Generates activation email for Go-Live Ready products.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://csa.autoloop.us/Customer/Edit/*
@@ -11,6 +11,24 @@
 
 
 $('#product-lists > div').append("<div id='BtnContainer'>");
+
+// Logo Request Button
+
+function GenerateLogoRequest() {
+    var site = $('#Customer_WebPage').val();
+    var name = $('#Customer_CompanyName').val();
+    var folder = $('#Customer_DealershipFolder').val();
+
+    var subject = ""+name+" - Logo Request";
+    var body = 'Hello,%0D%0A%0D%0APlease create a logo for '+name+'%0D%0A%0D%0AHere is the dealership folder: '+folder+'\\%0D%0A%0D%0AHere is their Website: '+site+'%0D%0A%0D%0AThank you,%0D%0A"';
+
+    var html = '<a href="mailto:headerrequest365@autoloop.com?cc=Installs@autoloop.com&subject='+subject+'&body='+body+'>';
+    html += "<button type='button' id='logoBtn' style='margin-left: 20px'>Request Logo</button></a>";
+    $('#dealer-details > div.input-append').append(html);
+};
+
+
+GenerateLogoRequest();
 
 
 // activation buttons
