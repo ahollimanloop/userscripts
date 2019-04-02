@@ -4,7 +4,7 @@
 // @version      1.0
 // @description  Fills out instant quote make settings
 // @author       Austin Holliman (aholliman@autoloop.com)
-// @match        https://autoloop.us/DMS/App/Notifications/InstantQuote/MakeSettings.aspx?*
+// @match        https://autoloop.us/DMS/App/Notifications/InstantQuote/MakeSettings.aspx*
 // @grant        none
 // ==/UserScript==
 
