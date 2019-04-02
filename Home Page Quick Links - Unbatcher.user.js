@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Home Page Quick Links / Unbatcher
 // @namespace    localhost
-// @version      1.3
+// @version      1.4
 // @description  Adds links to the default page to quickly get to settings
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Default.aspx
@@ -156,6 +156,12 @@ var salesTriggers = {
         makes: "https://autoloop.us/DMS/App/Notifications/VehicleUpgrade/MakeSettings.aspx",
         drive: "https://autoloop.us/DMS/App/TestDrive/VehicleUpgradeSettings.aspx",
         queue: "https://autoloop.us/DMS/App/Notifications/VehicleUpgrade/AQBatches.aspx",
+    },
+    InstantQuote: {
+        settings: "https://autoloop.us/DMS/App/Notifications/InstantQuote/Settings.aspx",
+        makes: "https://autoloop.us/DMS/App/Notifications/InstantQuote/MakeSettings.aspx",
+        drive: "https://autoloop.us/DMS/App/TestDrive/InstantQuoteSettings.aspx",
+        queue: "https://autoloop.us/DMS/App/Notifications/InstantQuote/AQBatches.aspx",
     },
 };
 
