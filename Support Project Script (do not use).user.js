@@ -2,7 +2,7 @@
 // @name         Support Project Script (do not use)
 // @namespace    localhost
 // @version      0.1
-// @description  Checks show amenities and sets amenity category to trigger department.
+// @description  For appointment resubmission.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://*/DMS/App/Notifications/VehicleAccessories/Settings.aspx
 // @match        https://*/dms/app/companyselector.aspx
@@ -21,6 +21,7 @@ $('#lbtnCancel').click(function() {
     storeName = stores['name'];
     Revisit(storeName);
 });
+
 $('#MainContent > div.container_24.clearfix').append("<button id='VehAccScriptBtn' type='button'>Execute Script</button>");
 $('#VehAccScriptBtn').click(function() {
     ImportData();

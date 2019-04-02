@@ -91,6 +91,9 @@ function CheckState() {
 function ReturnFailedAss() {
     var string = '';
     var no_associations = JSON.parse(sessionStorage.getItem('no_ass'));
+    if (no_associations == null) {
+        return 'none!';
+    };
     var length = no_associations.length;
     for (i=0;i<length;i++) {
         string += no_associations[i];

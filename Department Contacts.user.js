@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Department Contacts
 // @namespace    localhost
-// @version      1.2
+// @version      1.4
 // @description  Department Contacts
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/DealershipRepDefaultContact.aspx
@@ -126,12 +126,13 @@ value = x
 38 // trade cycle
 43 // vehicle upgrade
 44 // quote prospects
+53 // instant quote
 55 / Traide-Up welcome
 56 // trade up advantage
 */
 
 var serviceValues = ['2,', '4,', '5,', '13,', '14,', '20,', '21,', '28,', '35,', '40,', '41,', '57,']
-var salesValues= ['15,', '16,', '17,', '29,', '33,', '36,', '37,', '38,', '43,', '44,', '55,', '56,']
+var salesValues= ['15,', '16,', '17,', '29,', '33,', '36,', '37,', '38,', '43,', '44,', '53,', '55,', '56,']
 
 function ServiceTriggerButton() {
     $('#ctl00_ctl00_Main_Main_lstTriggers :input').each(function() {

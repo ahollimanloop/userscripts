@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         General Book Settings
 // @namespace    localhost
-// @version      1.2
+// @version      1.3
 // @description  General Book Settings
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/Schedule/Settings/Default.aspx
@@ -71,6 +71,9 @@ function ExecuteScript() {
     }
     if($("#RequireServiceSelectionInBook").prop("checked", false)) {
 		$("#RequireServiceSelectionInBook").click();
+	}
+    if($("#disableManualOpCodeEntries").prop("checked", false)) {
+		$("#disableManualOpCodeEntries").click();
 	}
 }
 
