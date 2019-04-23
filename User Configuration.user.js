@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        User Configuration
 // @namespace    localhost
-// @version      1.4
+// @version      1.5
 // @description  Adds new users, sets up permissions.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/DealershipSettings/EditUser.aspx?UserName=*
@@ -200,7 +200,7 @@ function ServiceAdvisorSettings() {
     $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
     $("#ctl00_ctl00_Main_Main_cblRoles_11").prop("checked", true); //first appointment
     $("#ctl00_ctl00_Main_Main_cblRoles_19").prop("checked", true); //service advisor
-    //$('#ctl00_ctl00_Main_Main_cblRoles_47').prop("checked", true); // mpi service advisor
+    $('#ctl00_ctl00_Main_Main_cblRoles_47').prop("checked", true); // mpi service advisor
     SetAssociation();
 }
 
@@ -212,6 +212,7 @@ function ServiceManagerSettings() {
     $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
     $("#ctl00_ctl00_Main_Main_cblRoles_11").prop("checked", true); //first appointment
     $("#ctl00_ctl00_Main_Main_cblRoles_21").prop("checked", true); //service manager
+    $("#ctl00_ctl00_Main_Main_cblRoles_50").prop("checked", true); //MPI manager
     SetAssociation();
 }
 
@@ -231,6 +232,7 @@ function BDCSettings() {
     $("#ctl00_ctl00_Main_Main_cblRoles_20").prop("checked", true); //service coordinator
     $("#ctl00_ctl00_Main_Main_cblRoles_4").prop("checked", true); //BDC Rep
     $("#ctl00_ctl00_Main_Main_cblRoles_31").prop("checked", true); // Multi Subdomain User
+    $("#ctl00_ctl00_Main_Main_cblRoles_5").prop("checked", true); //BDC User
 }
 
 function BDCAdmin() {
@@ -241,6 +243,7 @@ function BDCAdmin() {
     $("#ctl00_ctl00_Main_Main_cblRoles_20").prop("checked", true); //service coordinator
     $("#ctl00_ctl00_Main_Main_cblRoles_3").prop("checked", true); // bdc admin
     $("#ctl00_ctl00_Main_Main_cblRoles_31").prop("checked", true); // Multi Subdomain User
+    $("#ctl00_ctl00_Main_Main_cblRoles_5").prop("checked", true); //BDC User
 }
 
 function AdminSettings() {
@@ -262,16 +265,15 @@ function TechSettings() {
     $("#ctl00_ctl00_Main_Main_cblRoles_10").prop("checked", true); //employee
     $("#ctl00_ctl00_Main_Main_cblRoles_23").prop("checked", true); //technician
     $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
-    $('#ctl00_ctl00_Main_Main_cblRoles_0').prop("checked", true); // Agent
-    //$('#ctl00_ctl00_Main_Main_cblRoles_48').prop("checked", true); // mpi technician
+    $('#ctl00_ctl00_Main_Main_cblRoles_48').prop("checked", true); // mpi technician
     SetAssociation();
 }
 
 function PartsSettings() {
     $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(3); //login landing page set to scheduling
     $("#ctl00_ctl00_Main_Main_cblRoles_10").prop("checked", true); //employee
-    //$('#ctl00_ctl00_Main_Main_cblRoles_49').prop("checked", true); // mpi parts user
-    $('#ctl00_ctl00_Main_Main_cblRoles_0').prop("checked", true); // Agent
+    $('#ctl00_ctl00_Main_Main_cblRoles_49').prop("checked", true); // mpi parts user
+    $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
 }
 
 
