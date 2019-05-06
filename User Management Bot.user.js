@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         User Management Bot
 // @namespace    localhost
-// @version      1.7
+// @version      1.8
 // @description  Automate user management.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @match        https://autoloop.us/DMS/App/DealershipSettings/UserManagement.aspx
@@ -202,18 +202,18 @@ function EnterUser() {
     // MPI
     if (user_data['lane'] == "Mpi" || user_data['lane'] == "Both") {
         if (user_data['role'] == "Service Manager") {
-            $('#ctl00_ctl00_Main_Main_cblRoles_50').click();
+            $('#ctl00_ctl00_Main_Main_cblRoles_50').prop("checked", true);;
         }
         if (user_data['role'] == "Service Advisor") {
-            $('#ctl00_ctl00_Main_Main_cblRoles_47').click();
+            $('#ctl00_ctl00_Main_Main_cblRoles_47').prop("checked", true);;
         }
         if (user_data['role'] == "Technician") {
-            $('#ctl00_ctl00_Main_Main_cblRoles_48').click();
-            $('#ctl00_ctl00_Main_Main_cblRoles_2').click();
+            $('#ctl00_ctl00_Main_Main_cblRoles_48').prop("checked", true);;
+            $('#ctl00_ctl00_Main_Main_cblRoles_2').prop("checked", true);;
             $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(17); //login landing page set to MPI ledger
         }
         if (user_data['role'] == "Parts User") {
-            $('#ctl00_ctl00_Main_Main_cblRoles_49').click();
+            $('#ctl00_ctl00_Main_Main_cblRoles_49').prop("checked", true);;
             $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(17); //login landing page set to MPI ledger
         }
     };

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        User Configuration
 // @namespace    localhost
-// @version      1.5
+// @version      1.6
 // @description  Adds new users, sets up permissions.
 // @author       Austin Holliman (aholliman@autoloop.com)
 // @include      https://autoloop.us/DMS/App/DealershipSettings/EditUser.aspx?UserName=*
@@ -225,7 +225,7 @@ function ServiceCoordinatorSettings() {
 }
 
 function BDCSettings() {
-    $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(3); //login landing page set to scheduling
+    $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(14); //login landing page set to scheduling
     $("#ctl00_ctl00_Main_Main_cblRoles_10").prop("checked", true); //employee
     $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
     $("#ctl00_ctl00_Main_Main_cblRoles_11").prop("checked", true); //first appointment
@@ -236,7 +236,7 @@ function BDCSettings() {
 }
 
 function BDCAdmin() {
-    $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(3); //login landing page set to scheduling
+    $("#ctl00_ctl00_Main_Main_ddlLandingPage").val(12); //login landing page set to scheduling
     $("#ctl00_ctl00_Main_Main_cblRoles_10").prop("checked", true); //employee
     $("#ctl00_ctl00_Main_Main_cblRoles_2").prop("checked", true); //appointments user
     $("#ctl00_ctl00_Main_Main_cblRoles_11").prop("checked", true); //first appointment
